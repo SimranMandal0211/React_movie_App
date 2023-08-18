@@ -9,7 +9,9 @@ class MovieCard extends React.Component{
             plot: "Supernatural powers shown in the movie.",
             price: 199,
             rating: 8.9,
-            stars: 0
+            stars: 0, 
+            fav: false,
+            isInCart: false
         }
         // 3 ways of binding.... reson don't want to lost 'this'
         //1.globlely binding-- this.addStars = this.addStars.bind(this); ---> we can mantion it here directly and use this.addStars
@@ -47,6 +49,18 @@ class MovieCard extends React.Component{
         });
     }
 
+    handleFav = () => {
+        this.setState({
+            fav: !this.state.fav
+        })
+    }
+
+    toggleCart= () => {
+        this.setState({
+            isInCart: !this.state.isInCart
+        })
+    }
+
     render(){
         const {title, plot, price, rating, stars} = this.state;
         return (
@@ -78,8 +92,16 @@ class MovieCard extends React.Component{
 
                                 <span>{stars}</span>
                             </div>
-                            <button className="favourite-btn">Favourite</button>
-                            <button className="cart-btn">Add to cart</button>
+
+                            {/* {this.fav ? <button className="unfavourite-btn" onClick={this.handleFav}>Un-favourite</button>:
+                                    <button className="favourite-btn" onClick={this.handleFav}>Favourite</button>} */}
+
+                            <button className={ this.state.fav? "unfavourite-btn" : "favourite-btn" } onClick={this.handleFav}>{ this.state.fav ? "Un-favourite" : "Favourite" }</button>
+
+
+                            <button className={this.state.isInCart?"unfavourite-btn":"cart-btn"}  onClick={this.toggleCart}>
+                                {this.state.isInCart ? "Remove from Cart":"Add to Cart"}
+                            </button>
                         </div>
                     </div>
                 </div>
