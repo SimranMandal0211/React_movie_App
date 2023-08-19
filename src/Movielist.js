@@ -49,6 +49,7 @@ class MovieList extends Component{
         const {movies} = this.state;
         const mid = this.state.movies.indexOf(movie);
 
+        console.log('mid Inc---> ', mid);
         if(movies[mid].stars >= 5){
             return;
         }
@@ -60,13 +61,52 @@ class MovieList extends Component{
         })
     }
 
+    handleDecStar = (movie) => {
+        const {movies} = this.state;
+        const mid = this.state.movies.indexOf(movie);
+
+        console.log('mid Dec---> ', mid);
+        if(movies[mid].stars <= 0){
+            return;
+        }
+
+        movies[mid].stars -= 0.5;
+
+        this.setState({
+            movies: movies
+        })
+    }
+
+    handleFav = (movie) => {
+        const {movies} = this.state;
+        const mid = this.state.movies.indexOf(movie);
+        console.log('fav---> ', mid, 'movies--->',movies);
+
+        movies[mid].fav = !movies[mid].fav;
+        this.setState({
+            movies: movies
+        })
+        
+    }
+
+    handleCart = (movie) => {
+        const {movies} = this.state;
+        const mid = this.state.movies.indexOf(movie);
+        console.log('Cart---> ', mid, 'movies--->',movies);
+
+        movies[mid].isInCart = !movies[mid].isInCart;
+        this.setState({
+            movies: movies
+        })
+    }
+
     render(){
         // const {title, plot, price, rating, stars, fav, isInCart} = this.state.movies;
         const {movies} =this.state;
 
         return(
             <>
-               {movies.map((movie) =>  <MovieCard movies = {movie} addStars= {this.handleIncStar}/>)}
+               {movies.map((movie) =>  <MovieCard movies = {movie} addStars= {this.handleIncStar} decStars= {this.handleDecStar} toggleFav= {this.handleFav} toggleCart= {this.handleCart} />)}
             </>
 
             // <MovieCard title= {title}
