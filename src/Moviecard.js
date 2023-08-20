@@ -1,7 +1,6 @@
-import React from "react";
 import './index.css';
 
-class MovieCard extends React.Component{
+function MovieCard(props){
 
 // these functions are work when props not use and add this.state in constructor ....
     // addStars = () => {
@@ -46,11 +45,10 @@ class MovieCard extends React.Component{
     //     })
     // }
 
-    render(){
-        console.log(this.props);
-        const {movies, addStars, decStars, toggleFav, toggleCart} = this.props;
+        console.log(props);
+        const {movies, addStars, decStars, toggleFav, toggleCart} = props;
 
-        const {title, poster, plot, price, rating, stars, fav, isInCart} = this.props.movies;
+        const {title, poster, plot, price, rating, stars, fav, isInCart} = props.movies;
         return (
             <div className="main">
                 <div className="movie-card">
@@ -97,7 +95,6 @@ class MovieCard extends React.Component{
                 </div>
             </div>
         );
-    }
     
 }
 

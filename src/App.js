@@ -63,23 +63,33 @@ handleFav = (movie) => {
 }
 
 handleCart = (movie) => {
-    const {movies} = this.state;
+    let {movies, cartCount} = this.state;
     const mid = this.state.movies.indexOf(movie);
     console.log('Cart---> ', mid, 'movies--->',movies);
 
     movies[mid].isInCart = !movies[mid].isInCart;
+
+    if(movies[mid].isInCart){
+      cartCount = cartCount + 1;
+    }else{
+      cartCount -= 1;
+    }
+
     this.setState({
-        movies: movies
+        movies: movies,
+        cartCount
     })
+
+    console.log(cartCount);
 }
 
 
   render(){
-    const {movies} = this.state;
+    const {movies, cartCount} = this.state;
 
     return (
       <>
-       <Navbar />
+       <Navbar cartCount = {cartCount} />
        <MovieList movies = {movies}
                   addStars = {this.handleIncStar}
                   decStars = {this.handleDecStar}

@@ -1,7 +1,6 @@
 // This Navbar.js not used in code 
 // this is for practice different method of styling webpage
 
-import React from "react";
 import styled from "styled-components";
 
 //3. style components
@@ -40,20 +39,19 @@ const CartCount = styled.div`
     visibility: ${(props) => props.show ? "visible" : "hidden"};
 `;
 
-class Navbar extends React.Component{
-    render() {
+function Navbar(props){
+        const {cartCount}= props;
         return(
             <>
                 <Nav>
                     <Title> Movie APP </Title>
                     <div style={styles.cartContainer}>
                         <CartImg src="https://cdn-icons-png.flaticon.com/128/891/891462.png" alt="cart icon" style={styles.cartIcon}></CartImg>
-                        <CartCount color = "yellow" show = {true}>3</CartCount>
+                        <CartCount color = "yellow" show = {true}>{cartCount}</CartCount>
                     </div>
                 </Nav>
             </>
         )
-    }
 }
 
 export default Navbar;
