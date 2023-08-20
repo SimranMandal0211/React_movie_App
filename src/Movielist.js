@@ -2,114 +2,22 @@ import { Component } from "react";
 import MovieCard from "./Moviecard";
 
 class MovieList extends Component{
-    constructor(){
-        super();
-        this.state = {
-            movies : [
-                {
-                    id: 1,
-                    title: "The Avengers",
-                    poster: 'https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg',
-                    plot: "Supernatural powers shown in the movie.",
-                    price: 199,
-                    rating: 8.9,
-                    stars: 0, 
-                    fav: false,
-                    isInCart: false
-                },
-                {
-                    id: 2,
-                    title: "Iron Man",
-                    poster: 'https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg',
-                    plot: "After being held captive in an Afghan cave, billionaire engineer Tony Stark creates",
-                    price: 399,
-                    rating: 8.5,
-                    stars: 0, 
-                    fav: false,
-                    isInCart: false
-                },
-                {
-                    id:3,
-                    title: "The Dark Knight",
-                    poster: 'https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg',
-                    plot: "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham",
-                    price: 299,
-                    rating: 9.0,
-                    stars: 0, 
-                    fav: false,
-                    isInCart: false
-                },
-                
-            ]
-        }
-        // 3 ways of binding.... reson don't want to lost 'this'
-        //1.globlely binding-- this.addStars = this.addStars.bind(this); ---> we can mantion it here directly and use this.addStars
-        //2. local binding--- this.addStars.bind(this) use directly
-        // 3. make function arrow function
-    }
-
-    handleIncStar = (movie) => {
-        const {movies} = this.state;
-        const mid = this.state.movies.indexOf(movie);
-
-        console.log('mid Inc---> ', mid);
-        if(movies[mid].stars >= 5){
-            return;
-        }
-
-        movies[mid].stars += 0.5;
-
-        this.setState({
-            movies: movies
-        })
-    }
-
-    handleDecStar = (movie) => {
-        const {movies} = this.state;
-        const mid = this.state.movies.indexOf(movie);
-
-        console.log('mid Dec---> ', mid);
-        if(movies[mid].stars <= 0){
-            return;
-        }
-
-        movies[mid].stars -= 0.5;
-
-        this.setState({
-            movies: movies
-        })
-    }
-
-    handleFav = (movie) => {
-        const {movies} = this.state;
-        const mid = this.state.movies.indexOf(movie);
-        console.log('fav---> ', mid, 'movies--->',movies);
-
-        movies[mid].fav = !movies[mid].fav;
-        this.setState({
-            movies: movies
-        })
-        
-    }
-
-    handleCart = (movie) => {
-        const {movies} = this.state;
-        const mid = this.state.movies.indexOf(movie);
-        console.log('Cart---> ', mid, 'movies--->',movies);
-
-        movies[mid].isInCart = !movies[mid].isInCart;
-        this.setState({
-            movies: movies
-        })
-    }
 
     render(){
         // const {title, plot, price, rating, stars, fav, isInCart} = this.state.movies;
-        const {movies} =this.state;
+        const {movies, addStars, decStars, toggleFav, toggleCart} = this.props;
 
         return(
             <>
-               {movies.map((movie) =>  <MovieCard movies = {movie} addStars= {this.handleIncStar} decStars= {this.handleDecStar} toggleFav= {this.handleFav} toggleCart= {this.handleCart} />)}
+               {movies.map((movie) =>  
+                    <MovieCard  movies = {movie} 
+                                addStars = {addStars}
+                                decStars = {decStars}
+                                toggleCart = {toggleCart}
+                                toggleFav = {toggleFav}
+                                key = {movie.id}
+                    />
+                )}
             </>
 
             // <MovieCard title= {title}
